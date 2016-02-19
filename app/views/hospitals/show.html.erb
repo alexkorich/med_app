@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order number:</strong>
+  <%= @hospital.order_number %>
+</p>
+<p> 
+  Employees:
+  <%@hospital.employees.each  do |e|%>
+    e.surname
+  <% end %>
+</p>
+<%= link_to 'Edit', edit_hospital_path(@hospital) %> |
+<%= link_to 'Back', hospitals_path %>
