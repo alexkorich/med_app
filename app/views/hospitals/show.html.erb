@@ -7,7 +7,10 @@
 <p> 
   Employees:
   <%@hospital.employees.each  do |e|%>
-    e.surname
+    <%= e.surname %>
+    <%= e.position %>
+    <%= link_to "Show", e %>
+    <%= link_to 'Fire', fire_employee_path(e, hospital_id:@hospital.id), method: :post%>
   <% end %>
 </p>
 <%= link_to 'Edit', edit_hospital_path(@hospital) %> |

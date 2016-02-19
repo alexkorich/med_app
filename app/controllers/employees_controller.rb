@@ -60,7 +60,14 @@ class EmployeesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def fire
+    employment=Employment.find_by_employee_id_and_hospital_id(params[:id], params[:hospital_id])
+    if employment.destroy
+      format.html { redirect_to :back, notice: 'Employee was fired.' }
+    else
+      format.html { redirect_to :back, alert: 'Something went wrong!' }
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
