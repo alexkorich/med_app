@@ -73,7 +73,8 @@ class EmployeesController < ApplicationController
   end
 
    def hire
-    @employee.employments<<Employment.new(employee_id: params[:id], hospital_id: params[:hospital_id])
+    
+    @employee.hospitals<<Hospital.find(params[:hospital_id])
     respond_to do |format|
     if @employee.save
       format.html { redirect_to :back, notice: 'Employee was hired.' }

@@ -9,13 +9,17 @@ class Employee < ActiveRecord::Base
   validates :position, presence: true 
   validates :position, inclusion: {in: [ 'doctor', 'assistant', 'nurse' ]}
 
-  def self.free_employees ( hospital_id)
+  def self.free_employees (hospital_id)
     emp=[]
     employees=Employee.find_each do |e|
-      if e.hospitals.blank? || e.hospitals.detect {|h| h[:id]!=hospital_id}
+      if !e.hospitals.exists? || !e.hospitals.any? {|h| h[:id] == hospital_id}
+        puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
         emp<<e
     end
   end
   emp
   end
+  # def self.free_employees (hospital_id)
+  #   Employee.all.joins(:hospitals).where.not(hospitals: {id:hospital_id}).uniq
+  # end
 end

@@ -5,22 +5,29 @@
   <%= @hospital.order_number %>
 </p>
 <p> 
-  Employees:
+ <br>
+ <h3>  Employees:</h3>
+
   <%@hospital.employees.each  do |e|%>
+   <p>
     <%= e.surname %>
     <%= e.position %>
     <%= link_to "Show", e %>
     <%= link_to 'Fire', fire_employee_path(e, hospital_id: @hospital.id), method: :post%>
-  <% end %>
-</p>
-<%= link_to 'Edit', edit_hospital_path(@hospital) %> |
-<%= link_to 'Back', hospitals_path %>
-You can hire any of above:
-  <% @free_employees.each do |f| %>
+    </p>
+  <% end %>  
+  
+<h3>You can hire any of above:</h3>
+
+<p><% @free_employees.each do |f| %>
     <%= f.surname  %>
     <%= f.birth_year  %>
     <%= f.position  %>
     <%= link_to 'Hire', hire_employee_path(f, hospital_id: @hospital.id), method: :post%>
 
-  <% end %>
+  <% end %></p>
   
+  
+</p>
+<%= link_to 'Edit', edit_hospital_path(@hospital) %> |
+<%= link_to 'Back', hospitals_path %>
