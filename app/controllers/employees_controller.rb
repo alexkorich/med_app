@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:show, :edit, :update, :destroy, :hire]
 
   # GET /employees
   # GET /employees.json
@@ -60,14 +60,29 @@ class EmployeesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def fire
     employment=Employment.find_by_employee_id_and_hospital_id(params[:id], params[:hospital_id])
+    respond_to do |format|
     if employment.destroy
       format.html { redirect_to :back, notice: 'Employee was fired.' }
     else
       format.html { redirect_to :back, alert: 'Something went wrong!' }
     end
   end
+  end
+
+   def hire
+    @employee.employments<<Employment.new(employee_id: params[:id], hospital_id: params[:hospital_id])
+    respond_to do |format|
+    if @employee.save
+      format.html { redirect_to :back, notice: 'Employee was hired.' }
+    else
+      format.html { redirect_to :back, alert: 'Something went wrong!' }
+    end
+  end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee

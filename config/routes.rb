@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :employees do
     member do
       post :fire
+      post :hire
     end
   end
   resources :hospitals

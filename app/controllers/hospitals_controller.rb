@@ -5,11 +5,13 @@ class HospitalsController < ApplicationController
   # GET /hospitals.json
   def index
     @hospitals = Hospital.all
+
   end
 
   # GET /hospitals/1
   # GET /hospitals/1.json
   def show
+    @free_employees=Employee.free_employees(@hospital.id)
   end
 
   # GET /hospitals/new

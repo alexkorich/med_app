@@ -9,6 +9,13 @@ class Employee < ActiveRecord::Base
   validates :position, presence: true 
   validates :position, inclusion: {in: [ 'doctor', 'assistant', 'nurse' ]}
 
-
-  # scope :not_yet_working, lambda {|hospital_id| joins(:hospitals).where("hospital_id NOT ?", hospital_id) }
+  def self.free_employees ( hospital_id)
+    emp=[]
+    employees=Employee.find_each do |e|
+      if e.hospitals.blank? || e.hospitals.detect {|h| h[:id]!=hospital_id}
+        emp<<e
+    end
+  end
+  emp
+  end
 end
