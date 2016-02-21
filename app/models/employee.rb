@@ -13,7 +13,6 @@ class Employee < ActiveRecord::Base
     emp=[]
     employees=Employee.find_each do |e|
       if !e.hospitals.exists? || !e.hospitals.any? {|h| h[:id] == hospital_id}
-        puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
         emp<<e
     end
   end

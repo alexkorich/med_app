@@ -1,6 +1,13 @@
 <h1>Editing Employee</h1>
 
-<%= render 'form' %>
+
+<%= form_for(@employee) do |f|%>
+  <%= f.text_field :surname, class: 'form-control' %>
+  <%= f.select :position, ['doctor','assistant','nurse']%>
+  <%= f.number_field :birth_year, class: 'form-control' %>
+  <%= f.submit "Save" %>
+<% end %>
+
 
 <%= link_to 'Show', @employee %> |
 <%= link_to 'Back', employees_path %>
