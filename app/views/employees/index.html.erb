@@ -8,6 +8,7 @@
       <th>Surname</th>
       <th>Birth year</th>
       <th>Position</th>
+      <th>Hospitals</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +19,11 @@
         <td><%= employee.surname %></td>
         <td><%= employee.birth_year %></td>
         <td><%= employee.position %></td>
+        <td><% employee.hospitals.each do |h| %>
+              <%= link_to h.order_number, h %>
+              <% end %>
+        </td>
+
         <td><%= link_to 'Show', employee %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
         <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
