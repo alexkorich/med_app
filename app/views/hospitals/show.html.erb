@@ -4,30 +4,57 @@
   <strong>Order number:</strong>
   <%= @hospital.order_number %>
 </p>
-<p> 
- <br>
- <h3>  Employees:</h3>
-
-  <%@hospital.employees.each  do |e|%>
-   <p>
-    <%= e.surname %>
-    <%= e.position %>
-    <%= link_to "Show", e %>
-    <%= link_to 'Fire', fire_employee_path(e, hospital_id: @hospital.id), method: :post%>
-    </p>
-  <% end %>  
-  
-<h3>You can hire any of above:</h3>
-
-<p><% @free_employees.each do |f| %>
-    <%= f.surname  %>
-    <%= f.birth_year  %>
-    <%= f.position  %>
-    <%= link_to 'Hire', hire_employee_path(f, hospital_id: @hospital.id), method: :post%>
-
-  <% end %></p>
-  
-  
-</p>
+<% if @hospital.employees.any? %>
+  <h3>  Employees:</h3>
+  <table class="table">
+    <thead>
+      <th>Surname</th>
+      <th>Position</th>
+      <th>Birth year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <%@hospital.employees.each  do |e|%>
+      <tr>
+          <td><%= e.surname %></td>
+          <td><%= e.position %></td>
+          <td><%= e.birth_year %></td>
+          <td> <%= link_to "Show", e %></td>
+          <td><%= link_to 'Fire', fire_employee_path(e, hospital_id: @hospital.id), method: :post%></td>
+      </tr>
+      <% end %> 
+    </tbody>
+  </table>
+<% else %>
+<h3>Nobody works in this hospital!</h3>
+<% end %>
+<%if @free_employees.any? %>
+  <h3>You can hire any of above:</h3>
+  <table class="table">
+    <thead>
+      <th>Surname</th>
+      <th>Position</th>
+      <th>Birth year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <%@free_employees.each do |f| %>
+      <tr>
+          <td><%= f.surname %></td>
+          <td><%= f.position %></td>
+          <td><%= f.birth_year %></td>
+          <td> <%= link_to "Show", f %></td>
+          <td><%= link_to 'Hire', hire_employee_path(f, hospital_id: @hospital.id), method: :post%></td>
+      </tr>
+      <% end %> 
+    </tbody>
+  </table>
+<% else %>
+<h3>No employees are free to hire!</h3>
+<% end %>
 <%= link_to 'Edit', edit_hospital_path(@hospital) %> |
 <%= link_to 'Back', hospitals_path %>

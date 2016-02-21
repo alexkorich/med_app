@@ -1,11 +1,18 @@
 <h1>Editing Employee</h1>
 
+<% if @employee.errors.full_messages.any? %>
+  <% @employee.errors.full_messages.each do |error_message| %>
+    <div class="alert alert-danger" role="alert">
+    <%= error_message if @employee.errors.full_messages.first == error_message %> <br />
+    </div>
+  <% end %>
+<% end %>
 
 <%= form_for(@employee) do |f|%>
   <%= f.text_field :surname, class: 'form-control' %>
-  <%= f.select :position, ['doctor','assistant','nurse']%>
+  <%= f.select :position, ['doctor','assistant','nurse'], {}, {class:"form-control"}%>
   <%= f.number_field :birth_year, class: 'form-control' %>
-  <%= f.submit "Save" %>
+  <%= f.submit "Save", class: "btn btn-default"%>
 <% end %>
 
 

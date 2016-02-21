@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'hospitals#index'
   resources :employees do
     member do
       post :fire
